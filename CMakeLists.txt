@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(861-admission-exam C)
+project(851-admission-exam C)
 
 option(UNIT_TEST "unit test" OFF)
 if (UNIT_TEST)
