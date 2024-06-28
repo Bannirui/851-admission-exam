@@ -3,22 +3,22 @@
 //
 #include <stdlib.h>
 
-#include "Stack.h"
+#include "MyStack.h"
 
-Stack* StackInit()
+MyStack* StackInit()
 {
-	Stack* stack = (Stack*)malloc(sizeof(Stack));
+	MyStack* stack = (MyStack*)malloc(sizeof(MyStack));
 	stack->cap = 0;
 	stack->sz = 0;
 	return stack;
 }
 
-int StackEmpty(Stack* stack)
+int StackEmpty(MyStack* stack)
 {
 	return stack->sz == 0;
 }
 
-int StackPush(Stack* stack, int i)
+int StackPush(MyStack* stack, int i)
 {
 	if (stack->sz == stack->cap)
 	{
@@ -37,7 +37,7 @@ int StackPush(Stack* stack, int i)
 	stack->data[stack->sz++] = i;
 }
 
-int StackPop(Stack* stack)
+int StackPop(MyStack* stack)
 {
 	if (StackEmpty(stack)) return -1;
 	int ret = stack->data[stack->sz - 1];
@@ -45,7 +45,7 @@ int StackPop(Stack* stack)
 	return ret;
 }
 
-void StackFree(Stack* stack)
+void StackFree(MyStack* stack)
 {
 	free(stack->data);
 	free(stack);

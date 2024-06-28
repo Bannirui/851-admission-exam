@@ -4,22 +4,22 @@
 
 #include <stdlib.h>
 
-#include "Queue.h"
+#include "MyQueue.h"
 
-Queue* QueueInit()
+MyQueue* QueueInit()
 {
-	Queue* q = (Queue*)malloc(sizeof(Queue));
+	MyQueue* q = (MyQueue*)malloc(sizeof(MyQueue));
 	q->s1 = StackInit();
 	q->s2 = StackInit();
 	return q;
 }
 
-int QueueEnQueue(Queue* q, int elem)
+int EnQueue(MyQueue* q, int elem)
 {
 	StackPush(q->s1, elem);
 }
 
-int QueueDeQueue(Queue* q)
+int DeQueue(MyQueue* q)
 {
 	if (StackEmpty(q->s1) && StackEmpty(q->s2)) return -1;
 	if (StackEmpty(q->s2))

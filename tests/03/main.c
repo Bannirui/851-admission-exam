@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<math.h>
 
-#include "Queue.h"
+#include "MyQueue.h"
 
 /**
  * 创建两个栈s1和s2 其中s1负责入栈 s2负责出栈
@@ -12,19 +12,19 @@
 
 int main(int argc, char** argv)
 {
-	Queue* q = QueueInit();
+	MyQueue* q = QueueInit();
 	for (int i = 0; i < 5; i++)
 	{
 		printf("入队的元素是 %d\n", i);
-		QueueEnQueue(q, i);
+		EnQueue(q, i);
 	}
 	for (int i = 0; i < 5; i++)
 	{
-		printf("出队的元素是 %d\n", QueueDeQueue(q));
+		printf("出队的元素是 %d\n", DeQueue(q));
 	}
 	for (int i = 0; i < 2; ++i)
 	{
-		printf("队列为空了 继续出队的元素是 %d\n", QueueDeQueue(q));
+		printf("队列为空了 继续出队的元素是 %d\n", DeQueue(q));
 	}
 	return 0;
 }

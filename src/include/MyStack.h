@@ -5,17 +5,17 @@
 #ifndef INC_861_ADMISSION_EXAM_TESTS_03_STACK_H_
 #define INC_861_ADMISSION_EXAM_TESTS_03_STACK_H_
 
-typedef struct Stack
+typedef struct MyStack
 {
 	int cap;
 	int sz;
 	int* data;
-} Stack;
+} MyStack;
 
-Stack* StackInit();
-int StackEmpty(Stack* stack);
-int StackPush(Stack* stack, int i);
-int StackPop(Stack* stack);
-void StackFree(Stack* stack);
+MyStack* StackInit();
+int StackEmpty(MyStack* stack);
+int StackPush(MyStack* stack, int i);
+int StackPop(MyStack* stack);
+void StackFree(MyStack* stack);
 
 #endif //INC_861_ADMISSION_EXAM_TESTS_03_STACK_H_
