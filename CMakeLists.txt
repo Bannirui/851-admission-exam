@@ -14,6 +14,9 @@ list(APPEND test_extra_links MyQueue)
 # tree
 list(APPEND test_extra_lib_dirs "${CMAKE_CURRENT_BINARY_DIR}/src/tree")
 list(APPEND test_extra_links MyTree)
+# list
+list(APPEND test_extra_lib_dirs "${CMAKE_CURRENT_BINARY_DIR}/src/list")
+list(APPEND test_extra_links MyListNode)
 
 option(UNIT_TEST "unit test" OFF)
 
