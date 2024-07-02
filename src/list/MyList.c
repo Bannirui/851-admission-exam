@@ -99,3 +99,45 @@ fail:
 	free(dummy);
 	return head;
 }
+/**
+ * [begin...end)相对有序
+ * @param begin 起始节点 inclusive
+ * @param end 结束节点 exclusive
+ */
+MyListNode* getPartition(MyListNode* begin, MyListNode* end)
+{
+	// 支点
+	int key = begin->val, t;
+	// [0...p] 考察过的节点 相对支点而言小
+	// [q...] 待考察节点
+	MyListNode* p = begin;
+	MyListNode* q = begin->next;
+	while (q != end)
+	{
+		if (q->val < key)
+		{
+			p = p->next;
+			// 交换节点p跟q的值
+			t = p->val;
+			p->val = q->val;
+			q->val = t;
+		}
+		// 继续考察下一个节点
+		q = q->next;
+	}
+	// 支点提到分水岭
+	t = p->val;
+	p->val = begin->val;
+	begin->val = t;
+	return p;
+}
+void ListQuickSort(MyListNode* begin, MyListNode* end)
+{
+	if (!begin) return;
+	if (begin == end || begin->next == end) return;
+	MyListNode* partition = getPartition(begin, end);
+	// [begin...partition-1]
+	ListQuickSort(begin, partition);
+	// [partition+1,end)
+	ListQuickSort(partition->next, end);
+}
