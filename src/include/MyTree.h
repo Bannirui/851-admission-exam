@@ -12,9 +12,21 @@ typedef struct MyTreeNode
 	struct MyTreeNode* right;
 } MyTreeNode;
 
-MyTreeNode* TreeInit();
-MyTreeNode* TreeInitVal(int val);
+/**
+ * 实例化节点.
+ */
+MyTreeNode* TreeNodeInit();
+/**
+ * 实例化节点 指定值
+ * @param val 指定的值
+ */
+MyTreeNode* TreeNodeInitWithVal(int val);
 int InorderSerial(MyTreeNode* t, int arr[]);
+/**
+ * 给定数组 以中序遍历的顺序反序列化为二叉树.
+ * @param arr 数组
+ * @param sz 数组长度
+ */
 MyTreeNode* InorderDeserial(int* arr, int sz);
 
 #endif //INC_851_ADMISSION_EXAM_TESTS_04_TREENODE_H_

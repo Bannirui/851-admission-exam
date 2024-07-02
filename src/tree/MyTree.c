@@ -4,16 +4,16 @@
 
 #include <stdlib.h>
 
-#include "MyTreeNode.h"
+#include "MyTree.h"
 
-MyTreeNode* TreeInit()
+MyTreeNode* TreeNodeInit()
 {
 	MyTreeNode* tree = (MyTreeNode*)malloc(sizeof(MyTreeNode));
 	return tree;
 }
-MyTreeNode* TreeInitVal(int val)
+MyTreeNode* TreeNodeInitWithVal(int val)
 {
-	MyTreeNode* tree = TreeInit();
+	MyTreeNode* tree = TreeNodeInit();
 	tree->val = val;
 	return tree;
 }
@@ -29,12 +29,12 @@ MyTreeNode* dfsInorderDeserial(int* arr, int s, int e)
 	if (s > e) return NULL;
 	if (s == e)
 	{
-		return TreeInitVal(arr[s]);
+		return TreeNodeInitWithVal(arr[s]);
 	}
 	else
 	{
 		int mid = s + ((e - s) >> 1);
-		MyTreeNode* ans = TreeInitVal(arr[mid]);
+		MyTreeNode* ans = TreeNodeInitWithVal(arr[mid]);
 		ans->left = dfsInorderDeserial(arr, s, mid - 1);
 		ans->right = dfsInorderDeserial(arr, mid + 1, e);
 		return ans;

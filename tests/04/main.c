@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "MyStack.h"
-#include "MyTreeNode.h"
+#include "MyTree.h"
 
 // 数组的长度
 #define MAX_SZ 1024
