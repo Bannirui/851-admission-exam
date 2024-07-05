@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(851-admission-exam C)
+project(851-admission-exam CXX)
+
+set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(src)
 # 头文件路径
