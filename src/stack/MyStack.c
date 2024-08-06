@@ -35,6 +35,7 @@ int StackPush(MyStack* stack, int i)
 		stack->data = data;
 	}
 	stack->data[stack->sz++] = i;
+	return 0;
 }
 
 int StackPop(MyStack* stack)

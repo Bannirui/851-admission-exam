@@ -227,6 +227,7 @@ char MatrixUDG::readChar()
 	{
 		std::cin >> ch;
 	} while (!((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')));
+	return ch;
 }
 int MatrixUDG::getPosition(char ch)
 {
