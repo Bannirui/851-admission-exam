@@ -1,11 +1,7 @@
 #!/bin/sh
 
-# configure
-cmake \
-  -G "Unix Makefiles" \
-  -DUNIT_TEST=ON \
-  -S . \
-  -B build
+# clean
+cd build ; make clean
 
 # build
 cd build ; make

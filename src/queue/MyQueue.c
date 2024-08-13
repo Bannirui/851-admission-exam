@@ -17,6 +17,7 @@ MyQueue* QueueInit()
 int EnQueue(MyQueue* q, int elem)
 {
 	StackPush(q->s1, elem);
+	return 1;
 }
 
 int DeQueue(MyQueue* q)
