@@ -20,7 +20,7 @@ void MAX(int arr[], int lo, int hi, int& max1, int& max2)
 		max1 = arr[lo];
 		max2 = -INF;
 	}
-	else if (hi = lo + 1)
+	else if (hi == lo + 1)
 	{
 		// 区间有两个元素
 		max1 = max(arr[lo], arr[hi]);
