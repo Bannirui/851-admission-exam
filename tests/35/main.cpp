@@ -301,7 +301,6 @@ void p3(LNode* l)
 
 int main(int argc, char** argv)
 {
-	std::cout << "hello world" << std::endl;
 	LNode* a, * b, * c;
 	createLNodeR(a, test_arr1, n_1);
 	createLNodeR(b, test_arr2, n_2);
