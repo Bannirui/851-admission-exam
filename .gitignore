@@ -13,3 +13,5 @@ _deps
 .idea
 [Bb][Uu][Ii][Ll][Dd]/
 main.dSYM
+.cache/
+.vscode/
