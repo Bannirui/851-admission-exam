@@ -1,5 +1,9 @@
 project(02_test)
 
+if (LINUX)
+    # 依赖math库
+    LINK_LIBRARIES(m)
+endif ()
 add_executable(${PROJECT_NAME} main.c)
 
 add_test(NAME ${PROJECT_NAME}

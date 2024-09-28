@@ -1,6 +1,11 @@
 #include <string.h>
 #include <iostream>
+
+#ifdef __APPLE__
 #include <malloc/malloc.h>
+#elif __linux__
+#include <malloc.h>
+#endif
 
 #define maxSize 3
 

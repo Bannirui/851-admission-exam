@@ -1,6 +1,11 @@
 #include <string.h>
 #include <iostream>
+
+#ifdef __APPLE__
 #include <limits>
+#elif __linux__
+#include <climits>
+#endif
 
 /**
  * 单源最短路径问题 使用Dijkstra算法进行求解
