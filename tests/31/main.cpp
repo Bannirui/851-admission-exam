@@ -1,6 +1,10 @@
 #include <string.h>
 #include <iostream>
+#ifdef __linux__
+#include <climits>
+#elif  __APPLE__
 #include <limits>
+#endif
 #include <algorithm>
 #include <queue>
 
@@ -17,37 +21,16 @@ void Show(int arr[], int sz)
 	std::cout << std::endl;
 }
 
-/**
- * 输入的时候标记一下未丢失的数字 没出现的输出就好了
- */
 int main(int argc, char** argv)
 {
-	int t;
-	std::cin >> t;
-	while (t--)
+	int sz, i, j;
+	i = 1;
+	sscanf(argv[i++], "%d", &sz);
+	int arr[sz];
+	for (j = 0; j < sz; ++j)
 	{
-		int n;
-		std::cin >> n;
-		int m;
-		m = n + 2;
-		bool check[1024];
-		memset(check, false, sizeof(check));
-		while (n--)
-		{
-			int a;
-			std::cin >> a;
-			// 将没有丢失的元素置为1
-			check[a] = 1;
-		}
-		int ans[10];
-		int cnt = 0;
-		for (int i = 1; i <= m; i++)
-		{
-			// 将丢失的元素打印输出
-			if (check[i] == 0)
-				ans[cnt++] = i;
-			std::cout << ans[0] << " " << ans[1] << std::endl;
-		}
+		sscanf(argv[i++], "%d", &arr[j]);
 	}
+	Show(arr, sz);
 	return 0;
 }
