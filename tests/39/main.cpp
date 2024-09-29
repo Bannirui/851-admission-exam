@@ -1,32 +1,14 @@
 #include <iostream>
+#ifdef __linux__
+#include <malloc.h>
+#elif __APPLE__
+#include <sys/malloc.h>
+#endif
 
 #define maxSize 20
-#define INF 1000
 
 char VName[5] = { 'A', 'B', 'C', 'D', 'E' };
-int weight[5][5] = { INF, 3, 2, 4, 1,
-					 3, INF, 5, INF, 6, 2,
-					 5, INF, 2, INF, 4,
-					 INF, 2, INF, INF, 1,
-					 6, INF, INF, INF
-};
-int weight2[4][4] = { 0, 5, INF, 7,
-					  INF, 0, 4, 2,
-					  3, 3, 0, 2,
-					  INF, INF, 1, 0
-};
-int set[maxSize];
-typedef struct
-{
-	int no;
-	char data;
-} Vnode;
-typedef struct
-{
-	int edgeW[maxSize][maxSize];
-	int n, e;
-	Vnode vex[maxSize];
-} MGraph;
+
 typedef struct ArcNode
 {
 	int adjvex;
@@ -42,87 +24,94 @@ typedef struct AGraph
 	VNode adjlist[maxSize];
 	int n, e;
 } AGraph;
-void createMGraph(MGraph& g)
+void createGraph(AGraph*& G)
 {
-	g.e = 7;
-	g.n = 5;
-	for (int i = 0; i < g.n; ++i)
+	G = (AGraph*)malloc(sizeof(AGraph));
+	G->n = 5;
+	G->e = 7;
+	for (int i = 0; i <= G->n; i++)
 	{
-		g.vex[i].data = VName[i];
-		g.vex[i].no = i;
-	}
-	for (int i = 0; i < g.n; ++i)
-	{
-		for (int j = 0; j < g.n; ++j)
-		{
-			g.edgeW[i][j] = weight[i][j];
-		}
-	}
-}
-void createMGraph2(MGraph& g)
-{
-	g.e = 8;
-	g.n = 4;
-	for (int i = 0; i < g.n; ++i)
-	{
-		g.vex[i].data = VName[i];
-		g.vex[i].no = i;
-	}
-	for (int i = 0; i < g.n; ++i)
-	{
-		for (int j = 0; j < g.n; ++j)
-		{
-			g.edgeW[i][j] = weight2[i][j];
-		}
-	}
-}
-void createAGraph(AGraph*& g)
-{
-	g = (AGraph*)malloc(sizeof(AGraph));
-	g->n = 5;
-	g->e = 7;
-	for (int i = 0; i < g->n; ++i)
-	{
-		g->adjlist[i].data = VName[i];
-		g->adjlist[i].first = nullptr;
+		G->adjlist[i].data = VName[i];
+		G->adjlist[i].first = nullptr;
 	}
 	ArcNode* a1, * b1, * c1, * a2, * b2, * a3, * a4;
 	a1 = (ArcNode*)malloc(sizeof(ArcNode));
-	b1 = (ArcNode*)malloc(sizeof(ArcNode));
-	c1 = (ArcNode*)malloc(sizeof(ArcNode));
-	a2 = (ArcNode*)malloc(sizeof(ArcNode));
-	b2 = (ArcNode*)malloc(sizeof(ArcNode));
-	a3 = (ArcNode*)malloc(sizeof(ArcNode));
-	a4 = (ArcNode*)malloc(sizeof(ArcNode));
-
 	a1->adjvex = 1;
+	b1 = (ArcNode*)malloc(sizeof(ArcNode));
 	b1->adjvex = 3;
+	c1 = (ArcNode*)malloc(sizeof(ArcNode));
 	c1->adjvex = 4;
-	g->adjlist[0].first = a1;
+	G->adjlist[0].first = a1;
 	a1->next = b1;
 	b1->next = c1;
 	c1->next = nullptr;
-
+	a2 = (ArcNode*)malloc(sizeof(ArcNode));
 	a2->adjvex = 4;
+	b2 = (ArcNode*)malloc(sizeof(ArcNode));
 	b2->adjvex = 2;
-	g->adjlist[1].first = a2;
+	G->adjlist[1].first = a2;
 	a2->next = b2;
 	b2->next = nullptr;
-
+	a3 = (ArcNode*)malloc(sizeof(ArcNode));
 	a3->adjvex = 0;
-	g->adjlist[2].first = a3;
+	G->adjlist[2].first = a3;
 	a3->next = nullptr;
-
+	a4 = (ArcNode*)malloc(sizeof(ArcNode));
 	a4->adjvex = 2;
-	g->adjlist[3].first = a4;
+	G->adjlist[3].first = a4;
 	a4->next = nullptr;
 }
-void DFS(AGraph* g, int v)
+int dfs_visit[maxSize];
+int bfs_visit[maxSize];
+void DFS(AGraph* G, int v)
 {
-
+	ArcNode* s;
+	dfs_visit[v] = 1;
+	std::cout << "当前访问图结点的值为 " << G->adjlist[v].data << std::endl;
+	s = G->adjlist[v].first;
+	while (s != nullptr)
+	{
+		if (dfs_visit[s->adjvex] == 0)
+		{
+			DFS(G, s->adjvex);
+		}
+		s = s->next;
+	}
+}
+void BFS(AGraph* G, int v)
+{
+	ArcNode* s;
+	int queue[maxSize], front = 0, rear = 0;
+	int j;
+	bfs_visit[v] = 1;
+	std::cout << "当前访问的结点的值为" << G->adjlist[v].data << std::endl;
+	rear = (rear + 1) % maxSize;
+	queue[rear] = v;
+	while (front != rear)
+	{
+		front = (front + 1) % maxSize;
+		j = queue[front];
+		s = G->adjlist[j].first;
+		while (s != NULL)
+		{
+			if (bfs_visit[s->adjvex] == 0)
+			{
+				bfs_visit[s->adjvex] = 1;
+				std::cout << "当前访问的值为" << G->adjlist[s->adjvex].data << std::endl;
+				rear = (rear + 1) % maxSize;
+				queue[rear] = s->adjvex;
+			}
+			s = s->next;
+		}
+	}
 }
 int main(int argc, char** argv)
 {
-	std::cout << "hello world" << std::endl;
+	AGraph* g;
+	createGraph(g);
+	std::cout << "开始对图进行dfs" << std::endl;
+	DFS(g, 0);
+	std::cout << "开始对图进行bfs" << std::endl;
+	BFS(g, 0);
 	return 0;
 }
