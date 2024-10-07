@@ -101,6 +101,7 @@ void Dijikstra(MGraph g, int v, int dist[], int path[])
 }
 int main(int argc, char** argv)
 {
+	std::cout<<"狄杰斯特拉算法"<<std::endl;
 	MGraph g;
 	int sum, dist[maxSize], path[maxSize];
 	createGraph(g);

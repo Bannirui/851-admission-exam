@@ -1,10 +1,11 @@
 #!/bin/sh
 
-# clean
-cd build ; make clean
+set -e
 
-# build
-cd build ; make
+cur_dir=$(cd $(dirname $0); pwd)
+
+# clean
+cd ${cur_dir}/build ; make clean ; make
 
 # run
-cd build/tests ; ctest -VV
+cd ${cur_dir}/build/tests ; ctest -VV

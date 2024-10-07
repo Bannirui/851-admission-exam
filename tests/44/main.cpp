@@ -87,6 +87,7 @@ void Floyd(MGraph g, int path[][maxSize], int A[][maxSize])
 
 int main(int argc, char** argv)
 {
+	std::cout<<"弗洛依德算法"<<std::endl;
 	MGraph g;
 	int sum, A[maxSize][maxSize], path[maxSize][maxSize];
 	createGraph(g);
