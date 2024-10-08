@@ -46,11 +46,32 @@ void createLNodeL(LNode *&L, int arr[], int sz) {
   }
 }
 
+/**
+ * 在链表中找目标值.
+ * @retrun 1标识找到 0标识没有找到
+ */
+int findANdDelete(LNode *L, int x) {
+  LNode *p, *q;
+  p = L;
+  while (p->next != NULL) {
+    if (p->next->data == x)
+      break;
+    p = p->next;
+  }
+  if (p->next == NULL)
+    return 0;
+  q = p->next;
+  p->next = q->next;
+  free(q);
+  return 1;
+}
+
 int main(int argc, char **argv) {
   int arr[4] = {1, 2, 3, 4};
   LNode *L, *l;
   createLNodeL(L, arr, 4);
   l = L;
+  findANdDelete(l, 2);
   while (l->next) {
     l = l->next;
     std::cout << l->data << "..";
