@@ -140,11 +140,44 @@ int findRoad(AGraph *g, int vi, int vj) {
   return 0;
 }
 
+int visit[maxSize];
+int sum = 0;
+void DFS(AGraph *g, int v) {
+  ArcNode *s;
+  visit[v] = 1;
+  ++sum;
+  s = g->adjlist[v].first;
+  while (s != NULL) {
+    if (visit[s->adjvex] == 0) {
+      DFS(g, s->adjvex);
+    }
+    s = s->next;
+  }
+}
+
+void print(AGraph *g) {
+  std::cout << "打印" << std::endl;
+  int i, j;
+  for (i = 0; i < g->n; ++i) {
+    sum = 0;
+    for (j = 0; j < g->n; ++j) {
+      visit[j] = 0;
+    }
+    DFS(g, i);
+    if (sum == g->n) {
+      std::cout << i << " ";
+    }
+  }
+  std::cout << std::endl;
+}
+
 int main(int argc, char **argv) {
   AGraph *g;
   ArcNode *s;
   int sum, A[maxSize][maxSize], path[maxSize][maxSize];
   createGraph(g);
   std::cout << "&&" << findRoad(g, 1, 3) << std::endl;
+
+  print(g);
   return 0;
 }
