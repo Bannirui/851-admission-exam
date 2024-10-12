@@ -80,6 +80,25 @@ int find(BTNode *T, BTNode *&q, char key) {
   return find(T->rchild, q, key);
 }
 
+/**
+ * 从二叉树根节点开始找第k个结点
+ * @param q 找到的值缓存
+ * @param idx 1-based
+ * @return 0标识找到了 -1标识没找到
+ */
+int findKth(BTNode *T, BTNode *&q, int idx) {
+  if (T == NULL)
+    return -1;
+  --idx;
+  if (idx == 0) {
+    q = T;
+    return 0;
+  }
+  if (findKth(T->lchild, q, idx) == 0)
+    return 0;
+  return findKth(T->rchild, q, idx);
+}
+
 int main(int argc, char **argv) {
   BTNode *T;
   createTree(T);
@@ -87,11 +106,16 @@ int main(int argc, char **argv) {
 
   BTNode *q;
   char ch = '9';
-  int ret = find(T, q, ch);
-  if (ret == 0) {
+  if (find(T, q, ch) == 0) {
     std::cout << "找到了" << ch << std::endl;
   } else {
     std::cout << "没找到" << ch << std::endl;
   }
-  return 0;
+
+  int k = 3;
+  if (findKth(T, q, k) == 0) {
+    std::cout << "二叉树中第" << k << "个结点的值为" << q->data << std::endl;
+  } else {
+    std::cout << "二叉树中没有第" << k << "个结点" << std::endl;
+  }
 }
