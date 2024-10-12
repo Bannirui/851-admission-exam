@@ -54,6 +54,7 @@ void createTree(BTNode *&T) {
   h->rchild = NULL;
 }
 
+// 计算二叉树的深度 1-based
 int getDepth(BTNode *T) {
   if (T == NULL)
     return 0;
@@ -63,9 +64,34 @@ int getDepth(BTNode *T) {
   return (L > R ? L : R) + 1;
 }
 
+/**
+ * 从二叉树中检索key 找到了把节点缓存在q中
+ * @return 0标识找到了 -1标识没找到
+ */
+int find(BTNode *T, BTNode *&q, char key) {
+  if (T == NULL)
+    return -1;
+  if (T->data == key) {
+    q = T;
+    return 0;
+  }
+  if (find(T->lchild, q, key) == 0)
+    return 0;
+  return find(T->rchild, q, key);
+}
+
 int main(int argc, char **argv) {
   BTNode *T;
   createTree(T);
   std::cout << "二叉树的深度为: " << getDepth(T) << std::endl;
+
+  BTNode *q;
+  char ch = '9';
+  int ret = find(T, q, ch);
+  if (ret == 0) {
+    std::cout << "找到了" << ch << std::endl;
+  } else {
+    std::cout << "没找到" << ch << std::endl;
+  }
   return 0;
 }
