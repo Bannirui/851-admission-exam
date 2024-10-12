@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <valarray>
 #ifdef __linux__
 #include <malloc.h>
 #elif __APPLE__
@@ -25,7 +26,7 @@ typedef struct AGraph {
   int n, e;
 } AGraph;
 
-void createGrapj(AGraph *&G) {
+void createGrap(AGraph *&G) {
   G = (AGraph *)malloc(sizeof(AGraph));
   G->n = 5;
   G->e = 7;
@@ -88,4 +89,60 @@ void createGrapj(AGraph *&G) {
   b5->next = NULL;
 }
 
-int visit
+int visit[maxSize];
+
+void DFS(AGraph *G, int v, int &vn, int &en) {
+  ArcNode *s;
+  visit[v] = 1;
+  ++vn;
+  s = G->adjlist[v].first;
+  while (s != NULL) {
+    ++en;
+    if (visit[s->adjvex] == 0) {
+      DFS(G, s->adjvex, vn, en);
+    }
+    s = s->next;
+  }
+}
+
+int isTree(AGraph *G) {
+  int vn, en, i;
+  for (i = 0; i < G->n; ++i) {
+    visit[i] = 0;
+  }
+  DFS(G, 1, vn, en);
+  if (vn == G->n && G->n - 1 == en / 2)
+    return 1;
+  return 0;
+}
+
+void BFS(AGraph *G, int v) {
+  ArcNode *s;
+  int queue[maxSize], front = 0, rear = 0;
+  int j;
+  visit[v] = 1;
+  std::cout << G->adjlist[v].data << std::endl;
+  rear = (rear + 1) % maxSize;
+  queue[rear] = v;
+  while (front != rear) {
+    front = (front + 1) % maxSize;
+    j = queue[front];
+    s = G->adjlist[j].first;
+    while (s != NULL) {
+      if (visit[s->adjvex] == 0) {
+        visit[s->adjvex] = 1;
+        std::cout << G->adjlist[s->adjvex].data << std::endl;
+        rear = (rear + 1) % maxSize;
+        queue[rear] = s->adjvex;
+      }
+      s = s->next;
+    }
+  }
+}
+
+int main(int argc, char **argv) {
+  AGraph *g;
+  createGrap(g);
+  std::cout << "判断无向图是否为树 结果=" << isTree(g) << std::endl;
+  return 0;
+}
