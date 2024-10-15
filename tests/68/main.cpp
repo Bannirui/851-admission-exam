@@ -61,7 +61,7 @@ int select(int arr[], int lo, int hi, int target) {
 
 int main(int argc, char **argv) {
   int arr[8] = {1, 4, 2, -4, 3, 99, 5, 7}, B[8];
-  std::cout << select(arr, 0, 7, 5) << std::endl;
+  std::cout << "结果为 " << select(arr, 0, 7, 5) << std::endl;
 
   return 0;
 }
