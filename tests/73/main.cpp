@@ -58,6 +58,8 @@ void Traceback(int i, int j, int s[][maxSize]) {
 }
 
 int main(int argc, char **argv) {
-  std::cout << "数组" << std::endl;
+  int m[maxSize][maxSize], s[maxSize][maxSize];
+  triangleDivide(6, m, s);
+  Traceback(1, 5, s);
   return 0;
 }
