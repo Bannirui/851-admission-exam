@@ -74,22 +74,29 @@ int genminavail(MachineNode machine[], int sz)
 }
 
 /**
+ * 场景是任务多 机器资源少 如何调度资源执行任务
+ * 如果任务少 机器资源多 就不存在资源调度的问题
  * @param jobSz 任务列表
  * @param machineSz 机器资源
  */
 void greedy(JobNode job[], MachineNode machine[], int jobSz, int machineSz)
 {
+  // 机器资源多
   if(jobSz<=machineSz) return;
+  // 选出来可用时间最小的那台机器备用
   int k=0;
+  // 所有机器按照可用时间升序
   sort_time(job, 0, jobSz-1);
   std::cout<<"job按照耗时排序后为"<<std::endl;
   for(int i=0;i<jobSz;++i) std::cout<<"job "<<job[i].id<<", cost "<<job[i].needtime<<std::endl;
   for(int i=0;i<jobSz;++i)
   {
-    std::cout<<"machine="<<machine[k].id<<" avail="<<machine[k].avail<<" next time="<<machine[k].avail+job[i].needtime;
+    std::cout<<"当前k是"<<k<<" machine="<<machine[k].id<<" avail="<<machine[k].avail<<" next time="<<machine[k].avail+job[i].needtime;
+    // 机器k执行当前任务 它下一轮可用时间
     machine[k].avail+=job[i].needtime;
+    // 更新k 给下一轮任务选机器提前备用
     k=genminavail(machine, machineSz);
-    std::cout<<" 选取的机器是"<<k<<std::endl;
+    std::cout<<" 机器已经开始执行任务 选取新的最早可用机器是"<<k<<"给下一轮任务备用"<<std::endl;
   }
 }
 
