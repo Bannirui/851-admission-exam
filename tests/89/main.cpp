@@ -36,6 +36,7 @@ int Addition(Polynomial &a, Polynomial &b)
   if(a==NULL || b==NULL) return 0;
   struct Node* p=a, *q=b;
   struct Node* pPre=NULL;
+  // 合并同类项 结果放到a上
   while(p!=NULL && q!=NULL)
   {
     if(p->ex < q->ex)
