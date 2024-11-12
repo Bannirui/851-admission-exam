@@ -26,24 +26,23 @@ typedef struct MGraph
   int v,e;
 } MGraph;
 
-// 顶点的邻接矩阵 INF表示两点没有连通
-int edgesW[9][9] =
+// 矩阵 图中边 INF表示两点没有连通
+int edgesW[5][5] =
 {
-  0, 4, INF, INF, INF, INF, INF, 8, INF,
-  4, 0, 8, INF, INF, INF, INF, 11, INF,
-  INF, 8, 0, 7, INF, 4, INF, INF, 2,
-  INF, INF, 7, 0, 9, 14, INF, INF, INF,
-  INF, INF, INF, 9, 0, 10, INF, INF, INF,
-  INF, INF, 4, 14, 10, 0, 2, INF, INF,
-  INF, INF, INF, INF, INF, 2, 0, 1, 6,
-  8, 11, INF, INF, INF, INF, 1, 0, 7,
-  INF, INF, 2, INF, INF, INF, 6, 7, 0,
+  INF, 5, 1, 2, INF,
+  5, INF, 4, INF, 4,
+  1, 3, INF, 6, 2,
+  2, INF, 6, INF, 3,
+  INF, 4, 2, 3, INF
 };
 
 /**
+ * 开始的时候dist和path都是空的
  * @param v 源点
- * @param dist 用于缓存v到其他顶点的距离 dist[i]的语义是v到i的距离
- * @param path 用于缓存路径 path[i]的语义是
+ * @param dist 用于缓存图中点到源点的最短距离
+ *             dist[i]的语义是i到源点v的距离
+ * @param path 用于缓存到源点最短的距离以及对应的点
+ *             path[i]的语义是i到源的距离最短为path[i]
  */
 void Dijkstra(MGraph g, int v, int dist[], int path[])
 {
@@ -56,39 +55,37 @@ void Dijkstra(MGraph g, int v, int dist[], int path[])
   {
     dist[i]=g.edges[v][i];
     visit[i]=0;
-    if(dist[i]<INF)
-    {
-      // 说明v到i可以直达
-      path[i]=v;
-    }
-    else
-    {
-      // 顶点v到i不可直达
-      path[i]=-1;
-    }
+    if(dist[i]<INF) path[i]=v; // 说明v到i可以直达
+    else path[i]=-1; // 顶点v到i不可直达
   }
-  // 标识顶点v被访问过
+  // 源点先加到结果集
   visit[v]=1;
+  // 图中总共n个点 已经有了源点v 只要找剩下的n-1个点
   for(int i=0;i<g.v-1;++i)
   {
-    // 记录距离v点最近的点是多远
+    // 开始找图中到源点最近的点
     int tmp=INF;
     for(int j=0;j<g.v;++j)
     {
       if(!visit[j] && dist[j]<tmp)
       {
-        // 缓存到v点距离最近的点
         u=j;
         tmp=dist[j];
       }
     }
-    // 标识
+    // 新找到的到源点最近的
+    // 这也是Dj跟Prim算法的区别
+    // Dj是找到源点最近的点
+    // Prim算法是找到u集合中所有点最近的点
     visit[u]=1;
+    // visit集合中新增了点 也就意味着图中其他点到源点的最短距离可能发生了变化
+    // 源点->x点=源点->y点->x点
     for(int j=0;j<g.v;++j)
     {
-      if(!visit[j] && (dist[j]>g.edges[u][j]+dist[u]))
+      if(!visit[j] && (dist[u]+g.edges[u][j]<dist[j]))
       {
-        dist[j]=g.edges[u][j]+dist[u];
+        // j->源点的最短距离发生了变化
+        dist[j]=dist[u]+g.edges[u][j];
         path[j]=u;
       }
     }
@@ -106,7 +103,7 @@ int main(int argc, char** argv)
 {
   MGraph g;
   // 顶点数
-  g.v=9;
+  g.v=5;
   // 边数
   g.e=14;
   for(int i=0;i<g.v;++i)

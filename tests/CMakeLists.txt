@@ -82,11 +82,16 @@
 # add_subdirectory(82)
 # add_subdirectory(83)
 # add_subdirectory(84)
-# add_subdirectory(85)
+
+# Dj算法
+add_subdirectory(85)
+
 # Prim最小生成树
 # add_subdirectory(86)
+
 # Kruskal最小生成树
-add_subdirectory(87)
+#add_subdirectory(87)
+
 #add_subdirectory(88)
 #add_subdirectory(89)
 #add_subdirectory(90)
