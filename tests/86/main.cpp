@@ -36,6 +36,12 @@ int edgesW[5][5] =
 
 /**
  * 最小生成树
+ * 目的是从图中n个结点找到n-1个边形成生成树 保证所有边的权重和最小
+ * 创建两个集合u和v
+ * u中是选好做生成树的结点
+ * v中是候选结点
+ * 初始时所有结点都在v中 然后每一轮都从v中找到一个点 它到u中点的距离最小 把它从v中挪到u中
+ * 直到v中所有结点都到了u中结束
  * @param g 图
  * @param v 选定的出发点
  * @param sum 以v为出发点的最小生成树的路径结果
@@ -43,7 +49,7 @@ int edgesW[5][5] =
 void Prim(MGraph g, int v, int &sum)
 {
   // visit 用于标识顶点被访问过 1表示被访问过 0表示还没被访问
-  // dist 记录点到点的距离
+  // u u集合
   int visit[MAX_SZ], dist[MAX_SZ], u;
 
   for(int i=0;i<g.v;++i)
@@ -103,6 +109,7 @@ int main(int argc, char** argv)
       g.edges[i][j]=edgesW[i][j];
     }
   }
+  // Prim算法初始的时候没有结点 可以从任意点开始
   Prim(g, 0, sum);
   return 0;
 }
