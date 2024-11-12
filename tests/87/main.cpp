@@ -35,14 +35,23 @@ int edgesW[5][5]=
   INF, 4, 2, 3, INF
 };
 
+// 点到点之间距离
+// a b 是两个点
+// w是a跟b之间权重
 typedef struct Road
 {
   int a, b, w;
 } Road;
 
+// 距离升序表
 Road road[MAX_SZ];
+// 生成树中的结点连通情况
 int v[MAX_SZ];
 
+/**
+ * 给定顶点a 找a的树根
+ * v就是已经生成树 给两个顶点 树根一样说明两个结点为已经存在于同一棵树了
+ */
 int getRoot(int a)
 {
   while(a!=v[a])
@@ -52,7 +61,10 @@ int getRoot(int a)
   return a;
 }
 
-// 快排
+/**
+ * 距离表升序
+ * 快排
+ */
 void sort_w(Road road[], int lo, int hi)
 {
   int i=lo, j=hi;
@@ -64,10 +76,7 @@ void sort_w(Road road[], int lo, int hi)
     while(i<j)
     {
       // 相对tmp 右边都是比tmp大的
-      while(i<j && road[j].w>=tmp.w)
-      {
-        --j;
-      }
+      while(i<j && road[j].w>=tmp.w) --j;
       // 把比tmp小的挪到左边
       if(i<j)
       {
@@ -75,10 +84,7 @@ void sort_w(Road road[], int lo, int hi)
         ++i;
       }
       // 相对tmp 左边都是比tmp小的
-      while(i<j && road[i].w<tmp.w)
-      {
-        ++i;
-      }
+      while(i<j && road[i].w<tmp.w) ++i;
       // 把比tmp大的挪到右边
       if(i<j)
       {
@@ -94,17 +100,20 @@ void sort_w(Road road[], int lo, int hi)
   }
 }
 
+/**
+ * @param sum 最小生成树的最短路径长度
+ * @param road 已经排好序的距离升序表
+ */
 void Kruskal(MGraph g, int &sum, Road road[])
 {
-  for(int i=0;i<g.v;++i)
-  {
-    v[i]=i;
-  }
-  sort_w(road, 0, g.e-1);
+  // 初始化v 初始时每个顶点都只有自己连通自己
+  for(int i=0;i<g.v;++i) v[i]=i;
   for(int i=0;i<g.e;++i)
   {
+    // 看两个顶点在不在同一棵树中
     int a=getRoot(road[i].a);
     int b=getRoot(road[i].b);
+    // 如果已经在同一棵树中了 就不重复添加到生成树中了
     if(a!=b)
     {
       v[a]=b;
@@ -127,10 +136,12 @@ int main(int argc, char** argv)
     }
   }
 
+  // 图是无环图 因此点到点的距离不要重复
   for(int i=0;i<g.v;++i)
   {
     for(int j=i+1;j<g.v;++j)
     {
+      // 点i->点j是连通的
       if(g.edges[i][j]!=INF)
       {
         road[k].a=i;
@@ -140,6 +151,8 @@ int main(int argc, char** argv)
       }
     }
   }
+  // Kruskal算法要求点到点距离升序
+  sort_w(road, 0, g.e-1);
   Kruskal(g, sum, road);
   std::cout<<"最小生成树的路径结果为"<<sum<<std::endl;
   return 0;
