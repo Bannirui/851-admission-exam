@@ -84,8 +84,8 @@
 # add_subdirectory(84)
 # add_subdirectory(85)
 # Prim最小生成树
-#add_subdirectory(86)
+add_subdirectory(86)
 #add_subdirectory(87)
 #add_subdirectory(88)
 #add_subdirectory(89)
-add_subdirectory(90)
+#add_subdirectory(90)
