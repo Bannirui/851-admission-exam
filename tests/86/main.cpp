@@ -26,7 +26,7 @@ typedef struct MGraph
   VexNode vex[MAX_SZ];
 } MGraph;
 
-// 矩阵 图中顶点到
+// 矩阵 图中边
 int edgesW[5][5] =
 {
   INF, 5, 1, 2, INF,
