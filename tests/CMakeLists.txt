@@ -84,7 +84,7 @@
 # add_subdirectory(84)
 
 # Dj算法
-add_subdirectory(85)
+# add_subdirectory(85)
 
 # Prim最小生成树
 # add_subdirectory(86)
@@ -95,3 +95,6 @@ add_subdirectory(85)
 #add_subdirectory(88)
 #add_subdirectory(89)
 #add_subdirectory(90)
+
+# 水仙花数
+add_subdirectory(91)
