@@ -97,4 +97,7 @@
 #add_subdirectory(90)
 
 # 水仙花数
-add_subdirectory(91)
+#add_subdirectory(91)
+
+# 合并排序
+add_subdirectory(92)
