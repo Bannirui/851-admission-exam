@@ -20,7 +20,7 @@ class Node {
     Node(const Node &other);
 
   public:
-    int t; // 0-based 棋子放在arr[t]行 语意是这个棋子放到棋盘第t行 即[0...t-1]已经放好了
+    int t; // 0-based 棋子放在arr[t]行 语意是这个棋子放到棋盘第t行 即[0...t]已经放好了
     int *loc; // 长度t loc[0:t-1] 0-based 每一行第几列放棋子
     int n; // 共放置n个皇后
 
@@ -92,12 +92,12 @@ void Queen::ArrangeQueen() {
   while(!Q.empty()) {
     Node father=Q.front(); // 出队
     Q.pop();
-    if(father.t==n) {
-      // 棋盘上放满了皇后数量
+    if(father.t==n-1) {
+      // 棋盘上放满了皇后数量 找到了一种解决方案
       father.printQ();
       ++this->ansNum;
     }
-    // 已经放好了t个棋子 也就是放好了t行 现在往t+1行看看可以放哪一列
+    // 已经放好了t个棋子 也就是放好了t行 现在往t+1行看看可以放哪一列 所有有的可能位置都加到队列中
     for(int i=0;i<this->n;++i) {
       if(father.checkNext(i)) {
         // 棋盘t+1行 i列可以放
