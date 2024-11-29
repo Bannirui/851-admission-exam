@@ -103,4 +103,7 @@
 #add_subdirectory(92)
 #add_subdirectory(93)
 #add_subdirectory(94)
-add_subdirectory(95)
+#add_subdirectory(95)
+
+# n皇后问题
+add_subdirectory(96)
