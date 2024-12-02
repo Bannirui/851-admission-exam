@@ -106,4 +106,7 @@
 #add_subdirectory(95)
 
 # n皇后问题
-add_subdirectory(96)
+#add_subdirectory(96)
+
+# 最小堆
+add_subdirectory(97)
