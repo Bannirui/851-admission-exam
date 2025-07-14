@@ -125,3 +125,8 @@ add_executable(test100 test100.cpp)
 add_test(NAME test100
         COMMAND "./bin/test100"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+
+add_executable(test101 test101.cpp)
+add_test(NAME test101
+        COMMAND "./bin/test101"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
