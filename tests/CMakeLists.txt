@@ -79,3 +79,8 @@ foreach (i RANGE 100 101)
             COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${target_name}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 endforeach ()
+
+add_executable(test102 test102.cpp)
+add_test(NAME test102
+        COMMAND "./test102 12345#"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
