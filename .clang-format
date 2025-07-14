@@ -1,0 +1,32 @@
+# .clang-format
+
+BasedOnStyle: Google
+# Google默认为2 这里改为4更通用
+IndentWidth: 4
+TabWidth: 4
+# 使用空格代替Tab 跨平台不容易出问题
+UseTab: Never
+# 每行字符数限制
+ColumnLimit: 120
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: true
+# 大括号换行风格
+BreakBeforeBraces: Allman
+# int* ptr而不是int *ptr
+PointerAlignment: Left
+SpacesInAngles: false
+SpaceBeforeParens: ControlStatements
+# 命名空间内缩进
+NamespaceIndentation: All
+# 自动排序include语句 有些依赖必须严格顺序否则会出错比如glad和glfw
+SortIncludes: false
+# regroup 并合并相同模块的 include
+IncludeBlocks: Regroup
+# 自动换行注释
+ReflowComments: true
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+DerivePointerAlignment: false
+FixNamespaceComments: true
+# 自动注释未封闭的命名空间
+CommentPragmas: '^ IWYU pragma:'
