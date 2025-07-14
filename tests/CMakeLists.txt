@@ -1,132 +1,81 @@
 project(Test)
-# add_subdirectory(01)
-# add_subdirectory(02)
-# add_subdirectory(03)
-# add_subdirectory(04)
-# add_subdirectory(05)
-# add_subdirectory(06)
-# add_subdirectory(07)
-# add_subdirectory(08)
-# add_subdirectory(09)
-# add_subdirectory(10)
-# add_subdirectory(11)
-# add_subdirectory(12)
-# add_subdirectory(13)
-# add_subdirectory(14)
-# add_subdirectory(15)
-# add_subdirectory(16)
-# add_subdirectory(17)
-# add_subdirectory(18)
-# add_subdirectory(19)
-# add_subdirectory(20)
-# add_subdirectory(21)
-# add_subdirectory(22)
-# add_subdirectory(23)
-# add_subdirectory(24)
-# add_subdirectory(25)
-# add_subdirectory(26)
-# add_subdirectory(27)
-# add_subdirectory(28)
-# add_subdirectory(29)
-# add_subdirectory(30)
-# add_subdirectory(31)
-# add_subdirectory(32)
-# add_subdirectory(33)
-# add_subdirectory(34)
-# add_subdirectory(35)
-# add_subdirectory(36)
-# add_subdirectory(37)
-# add_subdirectory(38)
-# add_subdirectory(39)
-# add_subdirectory(40)
-# add_subdirectory(41)
-# add_subdirectory(42)
-# add_subdirectory(43)
-# add_subdirectory(44)
-# add_subdirectory(45)
-# add_subdirectory(46)
-# add_subdirectory(47)
-# add_subdirectory(48)
-# add_subdirectory(49)
-# add_subdirectory(50)
-# add_subdirectory(51)
-# add_subdirectory(52)
-# add_subdirectory(53)
-# add_subdirectory(54)
-# add_subdirectory(55)
-# add_subdirectory(56)
-# add_subdirectory(57)
-# add_subdirectory(58)
-# add_subdirectory(59)
-# add_subdirectory(60)
-# add_subdirectory(61)
-# add_subdirectory(62)
-# add_subdirectory(63)
-# add_subdirectory(64)
-# add_subdirectory(65)
-# add_subdirectory(66)
-# add_subdirectory(67)
-# add_subdirectory(68)
-# add_subdirectory(69)
-# add_subdirectory(70)
-# add_subdirectory(71)
-# add_subdirectory(72)
-# add_subdirectory(73)
-# add_subdirectory(74)
-# add_subdirectory(75)
-# add_subdirectory(76)
-# add_subdirectory(77)
-# add_subdirectory(78)
-# add_subdirectory(79)
-# add_subdirectory(80)
-# add_subdirectory(81)
-# add_subdirectory(82)
-# add_subdirectory(83)
-# add_subdirectory(84)
+if (LINUX)
+    # 依赖math库
+    LINK_LIBRARIES(m)
+endif ()
 
-# Dj算法
-# add_subdirectory(85)
+add_executable("test1" test1.c)
+add_test(NAME "test1"
+        COMMAND "./test1" "ACACMM"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# Prim最小生成树
-# add_subdirectory(86)
+add_executable(test2 test2.c)
+add_test(NAME test2
+        COMMAND "./test2" 4 "12" "-9.0" "--4" "0.3"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# Kruskal最小生成树
-#add_subdirectory(87)
+add_executable(test3 test3.c)
+target_link_libraries(test3 PRIVATE MyQueue)
+add_test(NAME test3
+        COMMAND "./test3"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-#add_subdirectory(88)
-#add_subdirectory(89)
-#add_subdirectory(90)
+add_executable(test4 test4.c)
+target_link_libraries(test4 PRIVATE MyTree)
+add_test(NAME test4
+        COMMAND "./test4"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# 水仙花数
-#add_subdirectory(91)
+add_executable(test5 test5.c)
+target_link_libraries(test5 PRIVATE MyList)
+add_test(NAME test5
+        COMMAND "./test5"
+        7 9 8 7 6 4 3 2 0 1
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# 合并排序
-#add_subdirectory(92)
-#add_subdirectory(93)
-#add_subdirectory(94)
-#add_subdirectory(95)
+add_executable(test6 test6.c)
+target_link_libraries(test6 PRIVATE MyList)
+add_test(NAME test6
+        COMMAND "./test6"
+        5 5 4 3 2 1
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# n皇后问题
-#add_subdirectory(96)
+add_executable(test7 test7.c)
+target_link_libraries(test7 PRIVATE MyTree)
+add_test(NAME test7
+        COMMAND "./test7"
+        7 1 2 3 5 6 7 8 3 8
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# 最小堆
-# add_subdirectory(97)
+add_executable(test8 test8.cpp)
+add_test(NAME test8
+        COMMAND "./test8"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# 批作业调度问题 优先队列分支限界法求解
-#add_subdirectory(98)
+add_executable(test9 test9.cpp)
+target_link_libraries(test9 PRIVATE MyTree)
+add_test(NAME test9
+        COMMAND "./test9 100"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
+foreach (i RANGE 10 97)
+    set(target_name test${i})
+    add_executable(${target_name} test${i}.cpp)
+    add_test(NAME ${target_name}
+            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${target_name}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+endforeach ()
 
 add_executable(test99 test99.cpp)
 add_test(NAME test99
-        COMMAND "./bin/test99"
+        COMMAND "./test99"
         "1234567890522"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(test100 test100.cpp)
-add_test(NAME test100
-        COMMAND "./bin/test100"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-
-add_executable(test101 test101.cpp)
-add_test(NAME test101
-        COMMAND "./bin/test101"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+foreach (i RANGE 100 101)
+    set(target_name test${i})
+    add_executable(${target_name} test${i}.cpp)
+    add_test(NAME ${target_name}
+            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${target_name}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+endforeach ()

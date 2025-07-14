@@ -2,14 +2,13 @@
 // Created by dingrui on 2024/7/1.
 //
 
-#ifndef INC_851_ADMISSION_EXAM_SRC_INCLUDE_LISTNODE_H_
-#define INC_851_ADMISSION_EXAM_SRC_INCLUDE_LISTNODE_H_
+#pragma once
 
 // 单链表
 typedef struct MyListNode
 {
-	int val;
-	struct MyListNode* next;
+    int                val;
+    struct MyListNode* next;
 } MyListNode;
 
 MyListNode* InitNode(int val);
@@ -20,8 +19,8 @@ MyListNode* InitListWithNext(MyListNode* next);
  * @param sz 数组长度
  */
 MyListNode* InitListFromArr(int* arr, int sz);
-void ListPrint(MyListNode* head);
-void FreeNode(MyListNode* node);
+void        ListPrint(MyListNode* head);
+void        FreeNode(MyListNode* node);
 MyListNode* ListReverseBased1(MyListNode* head, int m, int n);
 /**
  * based-0
@@ -38,5 +37,3 @@ MyListNode* ListReverseBased0(MyListNode* head, int m, int n);
  * @param end 结束节点 exclusive
  */
 void ListQuickSort(MyListNode* begin, MyListNode* end);
-
-#endif //INC_851_ADMISSION_EXAM_SRC_INCLUDE_LISTNODE_H_

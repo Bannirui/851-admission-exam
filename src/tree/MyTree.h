@@ -2,14 +2,13 @@
 // Created by dingrui on 2024/6/28.
 //
 
-#ifndef INC_851_ADMISSION_EXAM_TESTS_04_TREENODE_H_
-#define INC_851_ADMISSION_EXAM_TESTS_04_TREENODE_H_
+#pragma once
 
 typedef struct MyTreeNode
 {
-	int val;
-	struct MyTreeNode* left;
-	struct MyTreeNode* right;
+    int                val;
+    struct MyTreeNode* left;
+    struct MyTreeNode* right;
 } MyTreeNode;
 
 /**
@@ -21,12 +20,10 @@ MyTreeNode* TreeNodeInit();
  * @param val 指定的值
  */
 MyTreeNode* TreeNodeInitWithVal(int val);
-int InorderSerial(MyTreeNode* t, int arr[]);
+int         InorderSerial(MyTreeNode* t, int arr[]);
 /**
  * 给定数组 以中序遍历的顺序反序列化为二叉树.
  * @param arr 数组
  * @param sz 数组长度
  */
 MyTreeNode* InorderDeserial(int* arr, int sz);
-
-#endif //INC_851_ADMISSION_EXAM_TESTS_04_TREENODE_H_
