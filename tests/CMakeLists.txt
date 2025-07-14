@@ -1,3 +1,4 @@
+project(Test)
 # add_subdirectory(01)
 # add_subdirectory(02)
 # add_subdirectory(03)
@@ -113,3 +114,14 @@
 
 # 批作业调度问题 优先队列分支限界法求解
 #add_subdirectory(98)
+
+add_executable(test99 test99.cpp)
+add_test(NAME test99
+        COMMAND "./bin/test99"
+        "1234567890522"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+
+add_executable(test100 test100.cpp)
+add_test(NAME test100
+        COMMAND "./bin/test100"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
