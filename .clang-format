@@ -30,3 +30,5 @@ DerivePointerAlignment: false
 FixNamespaceComments: true
 # 自动注释未封闭的命名空间
 CommentPragmas: '^ IWYU pragma:'
+# public/protected/private缩进
+AccessModifierOffset: -4
