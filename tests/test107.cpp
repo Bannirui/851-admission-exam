@@ -9,8 +9,8 @@
 #include <cstdio>
 
 // 水平方向和垂直方向组合就是上下左右4个方向
-int H[4] = {0, 1, 0, -1};
-int V[4] = {-1, 0, 1, 0};
+int H[4] = {1, 0, 0, -1};
+int V[4] = {0, 1, -1, 0};
 // clang-format off
 // 8*8
 char Maze[MAX_SZ][MAX_SZ] = {
@@ -36,6 +36,8 @@ void PrintArr()
         }
     }
 }
+
+// 从[X,Y]坐标点出发找通路
 void FindPath(int X, int Y)
 {
     // 走到了边界
@@ -61,6 +63,6 @@ void FindPath(int X, int Y)
 
 int main(int argc, char** argv)
 {
-    FindPath(1, 0);
+    FindPath(1, 1);
     return 0;
 }
