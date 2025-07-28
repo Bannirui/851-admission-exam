@@ -85,7 +85,7 @@ add_test(NAME test102
         COMMAND "./test102 12345#"
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-foreach (i RANGE 103 121)
+foreach (i RANGE 103 122)
     set(target_name test${i})
     add_executable(${target_name} test${i}.cpp)
     add_test(NAME ${target_name}
